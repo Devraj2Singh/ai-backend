@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 
 const app = express();
 
-// TEMP: allow all origins so we are sure CORS is not blocking
+// Enable CORS for all origins (simple and safe for this demo)
 app.use(
   cors({
     origin: "*",
@@ -15,12 +15,12 @@ app.use(
 
 app.use(express.json());
 
-// Health check
+// Health check: GET /
 app.get("/", (req, res) => {
   res.json({ status: "Backend live!" });
 });
 
-// AI proxy
+// AI proxy: POST /
 app.post("/", async (req, res) => {
   try {
     const apiKey = process.env.PERPLEXITY_API_KEY;
