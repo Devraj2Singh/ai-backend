@@ -4,24 +4,10 @@ const fetch = require("node-fetch");
 
 const app = express();
 
-// All allowed frontend origins
-const allowedOrigins = [
-  "https://netflix-ohevdhaug-devraj-singhs-projects-cfcd9b87.vercel.app",
-  "https://netflix-6yi3h8sc2-devraj-singhs-projects-cfcd9b87.vercel.app",
-  "https://netflix-gpt-mu-lemon.vercel.app",
-  "https://netflix-ohevdhaug-devraj-singhs-projects-cfcd9b87.vercel.app",
-  "http://localhost:5173",
-  "http://localhost:3000",
-];
-
+// TEMP: allow all origins so we are sure CORS is not blocking
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error("Not allowed by CORS"));
-    },
+    origin: "*",
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
   })
@@ -66,4 +52,4 @@ app.post("/", async (req, res) => {
   }
 });
 
-module.exports;
+module.exports = app;
