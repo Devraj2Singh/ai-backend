@@ -4,10 +4,23 @@ const fetch = require("node-fetch");
 
 const app = express();
 
+// All allowed frontend origins
+const allowedOrigins = [
+  "https://netflix-6yi3h8sc2-devraj-singhs-projects-cfcd9b87.vercel.app",
+  "https://netflix-gpt-mu-lemon.vercel.app",
+  "https://netflix-ohevdhaug-devraj-singhs-projects-cfcd9b87.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
+
 app.use(
   cors({
-    origin:
-      "https://netflix-ohevdhaug-devraj-singhs-projects-cfcd9b87.vercel.app",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
   })
@@ -15,12 +28,12 @@ app.use(
 
 app.use(express.json());
 
-// Health check: GET /api
+// Health check
 app.get("/", (req, res) => {
   res.json({ status: "Backend live!" });
 });
 
-// AI proxy: POST /api
+// AI proxy
 app.post("/", async (req, res) => {
   try {
     const apiKey = process.env.PERPLEXITY_API_KEY;
@@ -52,4 +65,4 @@ app.post("/", async (req, res) => {
   }
 });
 
-module.exports = app;
+module.exports
