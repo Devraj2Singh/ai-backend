@@ -6,6 +6,7 @@ const app = express();
 
 // All allowed frontend origins
 const allowedOrigins = [
+  "https://netflix-ohevdhaug-devraj-singhs-projects-cfcd9b87.vercel.app",
   "https://netflix-6yi3h8sc2-devraj-singhs-projects-cfcd9b87.vercel.app",
   "https://netflix-gpt-mu-lemon.vercel.app",
   "https://netflix-ohevdhaug-devraj-singhs-projects-cfcd9b87.vercel.app",
@@ -65,4 +66,4 @@ app.post("/", async (req, res) => {
   }
 });
 
-module.exports
+module.exports;
